@@ -24,6 +24,21 @@ bash download_dataset.sh
 
 ### Training
 
+**Environment**
+
+To faithfully reproduce our results, please use the correct `1.8.1` pytorch version corresponding to your platforms/CUDA versions.
+
+```bash
+pip install torch==1.8.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+
+Then run the following script to install the remaining dependencies,
+
+```bash
+pip install -r requirements.txt
+```
+
 **Data**
 
 We utilize the released data from SimCSE that samples 1 million sentences from English Wikipedia. You can run `data/download_wiki.sh` to download it.
@@ -45,9 +60,11 @@ For BERT/RoBERTa-base models, we provide a single-GPU (or CPU) example, and for 
 * `--model_name_or_path`: Pre-trained checkpoints to start with. We support BERT-based models (`bert-base-uncased`, `bert-large-uncased`) and RoBERTa-based models (`RoBERTa-base`, `RoBERTa-large`).
 * `--c_model_name_or_path`: The checkpoints of Complementary model. We support SimCSE-BERT/RoBERTa-base models (`unsup-simcse-bert-base-uncased`, `unsup-simcse-roberta-base`).
 
-
 For results in the paper, we use 8 * Nvidia 3090 GPUs with CUDA 11. Using different types of devices or different versions of CUDA/other softwares may lead to slightly different performance.
 
+**Hyperparameter Sensitivity**
+
+Note that the performance of DCLR is also sensitive to the environment and hyperparameter settings. If you get different performance, we suggest a necessary hyperparameter search about ***phi***, ***noise_times*** around our provided values.
 
 ## Citation
 
