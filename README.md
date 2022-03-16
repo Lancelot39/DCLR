@@ -44,7 +44,6 @@ bash run.sh
 For BERT/RoBERTa-base models, we provide a single-GPU (or CPU) example, and for BERT/RoBERTa-large models we give a **multiple-GPU** example. We explain some important arguments in following:
 * `--model_name_or_path`: Pre-trained checkpoints to start with. We support BERT-based models (`bert-base-uncased`, `bert-large-uncased`) and RoBERTa-based models (`RoBERTa-base`, `RoBERTa-large`).
 * `--c_model_name_or_path`: The checkpoints of Complementary model. We support SimCSE-BERT/RoBERTa-base models (`unsup-simcse-bert-base-uncased`, `unsup-simcse-roberta-base`).
-* `--mlp_only_train`: We have found that for BERT/RoBERTa-base, it works better to train the model with MLP layer but test the model without it.
 
 
 For results in the paper, we use 8 * Nvidia 3090 GPUs with CUDA 11. Using different types of devices or different versions of CUDA/other softwares may lead to slightly different performance.
