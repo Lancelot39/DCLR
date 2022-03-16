@@ -28,9 +28,9 @@ CUDA_VISIBLE_DEVICES=0 python train.py \
     "$@"
 
 CUDA_VISIBLE_DEVICES=0 python evaluation.py \
-	      --model_name_or_path result/my-unsup-simcse-bert-base-uncased \
+	--model_name_or_path result/my-unsup-simcse-bert-base-uncased \
         --pooler cls_before_pooler \
-	      --task_set sts \
+	--task_set sts \
         --mode test
 
 echo "Start to training on RoBERTa-base"
@@ -61,16 +61,16 @@ CUDA_VISIBLE_DEVICES=0 python train.py \
     "$@"
 
 CUDA_VISIBLE_DEVICES=0 python evaluation.py \
-	      --model_name_or_path result/my-unsup-simcse-roberta-base \
+	--model_name_or_path result/my-unsup-simcse-roberta-base \
         --pooler cls_before_pooler \
-	      --task_set sts \
+	--task_set sts \
         --mode test
 
 
 echo "Start to training on BERT-large"
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 55555 train.py \
     --model_name_or_path unsup-simcse-bert-large-uncased \
-    --c_model_name_or_path unsup-simcse-bert-large-uncased \
+    --c_model_name_or_path unsup-simcse-bert-base-uncased \
     --train_file data/wiki1m_for_simcse.txt \
     --output_dir result/my-unsup-simcse-bert-large-uncased \
     --num_train_epochs 1 \
@@ -95,15 +95,15 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
     "$@"
 
 CUDA_VISIBLE_DEVICES=0 python evaluation.py \
-	      --model_name_or_path result/my-unsup-simcse-bert-large-uncased \
+	--model_name_or_path result/my-unsup-simcse-bert-large-uncased \
         --pooler cls_before_pooler \
-	      --task_set sts \
+	--task_set sts \
         --mode test
 
 echo "Start to training on RoBERTa-large"
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node 4 --master_port 55555 train.py \
     --model_name_or_path unsup-simcse-roberta-large \
-    --c_model_name_or_path unsup-simcse-roberta-large \
+    --c_model_name_or_path unsup-simcse-roberta-base \
     --train_file data/wiki1m_for_simcse.txt \
     --output_dir result/my-unsup-simcse-roberta-large \
     --num_train_epochs 1 \
@@ -128,7 +128,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node
     "$@"
 
 CUDA_VISIBLE_DEVICES=0 python evaluation.py \
-	      --model_name_or_path result/my-unsup-simcse-roberta-large \
+	--model_name_or_path result/my-unsup-simcse-roberta-large \
         --pooler cls_before_pooler \
-	      --task_set sts \
+	--task_set sts \
         --mode test
